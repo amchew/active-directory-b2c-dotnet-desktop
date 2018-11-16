@@ -1,4 +1,11 @@
-﻿using Microsoft.Identity.Client;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.Identity.Client;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,19 +15,19 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace active_directory_b2c_wpf
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+namespace AD_B2C
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public partial class MainWindow : Window
+    public sealed partial class MainPage : Page
     {
-
-        public MainWindow()
+        public MainPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
-
         private async void SignInButton_Click(object sender, RoutedEventArgs e)
         {
             AuthenticationResult authResult = null;
@@ -133,7 +140,7 @@ namespace active_directory_b2c_wpf
             IEnumerable<IAccount> accounts = await App.PublicClientApp.GetAccountsAsync();
             try
             {
-               while(accounts.Any())
+                while (accounts.Any())
                 {
                     await App.PublicClientApp.RemoveAsync(accounts.FirstOrDefault());
                     accounts = await App.PublicClientApp.GetAccountsAsync();
